@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estácio Polo Nova Lima | Graduação e Pós EAD | Rede Bcc</title>
+    
+    <!-- SEO TÍTULOS E DESCRIÇÕES -->
+    <meta name="description" content="Estude na Estácio Polo Nova Lima ou em mais de 20 unidades parceiras da Rede Bcc em MG. Graduação e Pós-graduação com as melhores bolsas e Parcelamento PAR.">
+    <meta name="keywords" content="estácio nova lima, faculdade nova lima, bolsas de estudo estacio, ead estácio, bcc consultoria, parcelamento par estácio, graduação a distância minas gerais, polo estácio">
+    <meta name="author" content="Bcc Consultoria em Educação">
+    <meta name="robots" content="index, follow">
+    
+    <!-- OPEN GRAPH (Para ficar bonito quando enviar o link no WhatsApp/Facebook) -->
+    <meta property="og:title" content="Estácio Polo Nova Lima | Graduação e Pós EAD">
+    <meta property="description" content="Sua faculdade não precisa ser cara nem longe. Bolsas exclusivas em Nova Lima e Região.">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/4/4b/Est%C3%A1cio_logo.png">
+    <meta property="og:url" content="https://polosestacio.com.br">
+    <meta property="og:type" content="website">
+
+    <!-- ÍCONE DO SITE (Favicon) -->
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/4/4b/Est%C3%A1cio_logo.png">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração do Tailwind (Identidade Visual) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        estacio: {
+                            blue: '#003A70',     /* Primária Azul Escuro */
+                            lightBlue: '#0072CE',/* Secundária Azul Claro */
+                            green: '#00C853',    /* Destaque Verde */
+                            dark: '#0A1325',     /* Fundo Premium */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Phosphor Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Utilitários Mínimos que o Tailwind JIT não cobre por padrão -->
+    <style>
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Text gradient helper */
+        .text-gradient {
+            background: linear-gradient(135deg, #00C853 0%, #0072CE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-estacio-dark text-slate-200 antialiased selection:bg-estacio-lightBlue selection:text-white relative overflow-x-hidden">
+
+    <!-- ========================================== -->
+    <!-- BLOCO 1: HTML & TAILWIND CSS               -->
+    <!-- ========================================== -->
+
+    <!-- CANVAS BACKGROUND (Motor de Partículas Vanilla JS) -->
+    <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-60"></canvas>
+
+    <!-- WhatsApp Flutuante Central (Bcc) -->
+    <a href="https://wa.me/5531971772093?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Bcc%20Consultoria%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20bolsas%20da%20Est%C3%A1cio." target="_blank" class="fixed bottom-6 right-6 z-50 bg-estacio-green text-white p-4 rounded-full shadow-[0_0_20px_rgba(0,200,83,0.4)] hover:scale-110 hover:bg-[#00b048] transition-all duration-300 flex items-center justify-center group">
+        <i class="ph-fill ph-whatsapp-logo text-4xl"></i>
+        <span class="absolute right-16 bg-white text-slate-800 text-sm font-bold px-4 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Falar com a Central Bcc
+        </span>
+    </a>
+
+    <!-- Navbar Localizada -->
+    <nav class="fixed w-full z-40 top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img class="h-16 md:h-20 w-auto scale-[2] md:scale-[2.5] origin-left" src="img/logo.png.svg" alt="Logo Estácio Polo Nova Lima">
+                    <div class="flex flex-col border-l-2 border-slate-300 pl-3 py-0.5 ml-4 md:ml-8">
+                        <span class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-widest leading-tight">Polo Nova Lima</span>
+                        <span class="text-[10px] sm:text-[11px] font-black text-estacio-blue uppercase tracking-widest leading-tight">Rede Bcc</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
+                    <a href="#solucoes" class="hover:text-estacio-lightBlue transition-colors">Vantagens</a>
+                    <a href="#rede-polos" class="hover:text-estacio-lightBlue transition-colors font-bold text-estacio-blue">Encontre seu Polo</a>
+                </div>
+                <div>
+                    <a href="#captura" onclick="focarFormulario(event)" class="bg-estacio-blue hover:bg-estacio-lightBlue text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-md text-sm flex items-center gap-2">
+                        <i class="ph-bold ph-student"></i> Simular Bolsa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-20">
+        <!-- HERO SECTION (Conversão Imediata - Foco Nova Lima) -->
+        <section id="captura" class="relative py-16 lg:py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Copy Focada nas Dores -->
+                    <div class="text-left opacity-0 animate-[fadeInUp_0.8s_ease-out_forwards]">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white uppercase tracking-widest mb-6 backdrop-blur-sm shadow-lg">
+                            <span class="w-2 h-2 rounded-full bg-estacio-green animate-pulse"></span>
+                            Matrículas Abertas - Nova Lima e Região
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black leading-tight mb-6 text-white">
+                            Sua faculdade não precisa ser <span class="text-estacio-green">cara</span> nem <span class="text-estacio-lightBlue">longe</span>.
+                        </h1>
+                        
+                        <p class="text-lg sm:text-xl text-blue-100 mb-8 max-w-lg font-light leading-relaxed">
+                            A <strong>Bcc Consultoria</strong> te conecta à maior universidade do Brasil. Estude no Polo Nova Lima ou em mais de 20 unidades em MG com flexibilidade e suporte.
+                        </p>
+                        
+                        <!-- Gatilhos Mentais -->
+                        <div class="space-y-4 mb-8 hidden sm:block">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-estacio-green/20 flex items-center justify-center border border-estacio-green/30">
+                                    <i class="ph-fill ph-check-circle text-xl text-estacio-green"></i>
+                                </div>
+                                <span class="text-white font-medium">PAR: Pague 70% só depois de formado</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-estacio-lightBlue/20 flex items-center justify-center border border-estacio-lightBlue/30">
+                                    <i class="ph-fill ph-map-pin text-xl text-estacio-lightBlue"></i>
+                                </div>
+                                <span class="text-white font-medium">Bolsas exclusivas em toda a nossa rede</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulário de Captura Estratégico -->
+                    <div class="w-full max-w-md mx-auto lg:ml-auto opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]">
+                        <div class="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] relative">
+                            <!-- Brilho no topo do form -->
+                            <div class="absolute top-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-estacio-lightBlue to-transparent opacity-70"></div>
+
+                            <div class="text-center mb-6">
+                                <h3 class="text-2xl font-display font-bold text-white mb-2">Simule sua Mensalidade</h3>
+                                <p class="text-sm text-slate-300">Fale com a nossa Central e garanta sua vaga.</p>
+                            </div>
+
+                            <form class="space-y-4" id="leadForm">
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="ph ph-user text-slate-400 text-lg"></i>
+                                    </div>
+                                    <input type="text" id="nomeInput" class="w-full bg-white/5 border border-white/10 text-white rounded-xl pl-12 pr-4 py-3.5 focus:outline-none focus:border-estacio-lightBlue focus:bg-white/10 transition-all text-sm placeholder-slate-400" placeholder="Seu Nome Completo">
+                                </div>
+
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="ph ph-whatsapp-logo text-slate-400 text-lg"></i>
+                                    </div>
+                                    <input type="tel" id="whatsappInput" class="w-full bg-white/5 border border-white/10 text-white rounded-xl pl-12 pr-4 py-3.5 focus:outline-none focus:border-estacio-lightBlue focus:bg-white/10 transition-all text-sm placeholder-slate-400" placeholder="Seu WhatsApp">
+                                </div>
+
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <i class="ph ph-map-pin text-slate-400 text-lg"></i>
+                                    </div>
+                                    <select id="unidadeInput" class="w-full bg-white/5 border border-white/10 text-white rounded-xl pl-12 pr-4 py-3.5 focus:outline-none focus:border-estacio-lightBlue focus:bg-white/10 transition-all text-sm appearance-none">
+                                        <option value="" disabled selected class="text-slate-800">Onde prefere estudar?</option>
+                                        <option value="Nova Lima" class="text-slate-800">Polo Nova Lima (Sede)</option>
+                                        <option value="Belo Horizonte" class="text-slate-800">Belo Horizonte (6 polos)</option>
+                                        <option value="Ipatinga" class="text-slate-800">Ipatinga</option>
+                                        <option value="Outra Cidade" class="text-slate-800">Outra cidade em MG</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                        <i class="ph ph-caret-down text-slate-400"></i>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3 mt-4 bg-black/20 p-3 rounded-xl border border-white/5">
+                                    <input type="checkbox" id="aceite_termos" class="mt-0.5 text-estacio-green bg-white/10 border-white/20 rounded cursor-pointer focus:ring-estacio-green focus:ring-offset-0">
+                                    <label for="aceite_termos" class="text-[11px] text-slate-300 leading-tight cursor-pointer">
+                                        Concordo com a <button type="button" onclick="abrirModalPrivacidade(event)" class="text-estacio-lightBlue hover:text-white underline transition-colors">Política de Privacidade</button>.
+                                    </label>
+                                </div>
+
+                                <!-- Botão de Conversão em Tailwind Puro -->
+                                <button type="button" onclick="enviarParaCentral(event)" class="w-full relative group overflow-hidden bg-estacio-green hover:bg-[#00b048] text-white font-bold text-lg py-4 px-4 rounded-xl shadow-[0_0_20px_rgba(0,200,83,0.3)] transition-all duration-300 flex justify-center items-center gap-2 mt-4">
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                                    <i class="ph-bold ph-whatsapp-logo text-2xl"></i> Falar com a Central
+                                </button>
+                                <p class="text-[10px] text-center text-slate-400 mt-3">Atendimento rápido e humanizado.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: ESTRUTURA POLO NOVA LIMA -->
+        <section id="estrutura" class="py-24 bg-white text-slate-800 relative z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal opacity-0 translate-y-8 transition-all duration-700">
+                    <h2 class="text-sm font-bold text-estacio-green uppercase tracking-[0.2em] mb-2">Estrutura Física</h2>
+                    <h3 class="text-3xl md:text-5xl font-display font-bold text-estacio-blue mb-6">Conheça o Polo Nova Lima</h3>
+                    <p class="text-slate-600 text-lg font-light">Um ambiente moderno, climatizado e preparado para o seu desenvolvimento acadêmico. Venha nos visitar!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Fachada -->
+                    <div class="group cursor-pointer scroll-reveal opacity-0 translate-y-8 delay-100 transition-all duration-700">
+                        <div class="overflow-hidden rounded-3xl shadow-lg border border-slate-200 bg-slate-100 h-64 md:h-80 relative">
+                            <img src="img/fachada.png.png" alt="Fachada do Polo Estácio Nova Lima" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-estacio-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-1">Fachada</h4>
+                                    <p class="text-blue-100 text-sm">Fácil acesso no Centro de Nova Lima</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recepção -->
+                    <div class="group cursor-pointer scroll-reveal opacity-0 translate-y-8 delay-200 transition-all duration-700">
+                        <div class="overflow-hidden rounded-3xl shadow-lg border border-slate-200 bg-slate-100 h-64 md:h-80 relative">
+                            <img src="img/recepcao.png.png" alt="Recepção do Polo Estácio Nova Lima" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-estacio-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-1">Recepção</h4>
+                                    <p class="text-blue-100 text-sm">Atendimento humanizado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Laboratório -->
+                    <div class="group cursor-pointer scroll-reveal opacity-0 translate-y-8 delay-300 transition-all duration-700">
+                        <div class="overflow-hidden rounded-3xl shadow-lg border border-slate-200 bg-slate-100 h-64 md:h-80 relative">
+                            <img src="img/laboratorio.png.png" alt="Laboratório de Informática Polo Estácio Nova Lima" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-estacio-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-1">Laboratório de Informática</h4>
+                                    <p class="text-blue-100 text-sm">Computadores de alta performance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: BUSCADOR DE POLOS (A Força da Rede) -->
+        <section id="rede-polos" class="py-24 relative overflow-hidden bg-[#070D1A] border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-12 scroll-reveal opacity-0 translate-y-8 transition-all duration-700">
+                    <h2 class="text-sm font-bold text-estacio-lightBlue uppercase tracking-[0.2em] mb-2">Expansão Bcc</h2>
+                    <h3 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">Encontre o seu Polo</h3>
+                    <p class="text-slate-400 text-lg mb-10 font-light">São mais de 20 unidades estruturadas em Minas Gerais.</p>
+                    
+                    <!-- Controles Interativos -->
+                    <div class="flex flex-col md:flex-row gap-4 justify-center items-center mb-10">
+                        <div class="relative w-full md:w-96 shadow-lg">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="ph-bold ph-magnifying-glass text-slate-400 text-lg"></i>
+                            </div>
+                            <input type="text" id="buscaPolo" onkeyup="buscarPorTexto()" class="w-full bg-white/5 border border-white/10 text-white rounded-xl pl-12 pr-4 py-3.5 focus:outline-none focus:border-estacio-lightBlue focus:bg-white/10 transition-all font-medium text-sm placeholder-slate-500" placeholder="Digite a cidade...">
+                        </div>
+
+                        <!-- Quick Filters -->
+                        <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-4 md:pb-0 hide-scrollbar" id="filtro-botoes">
+                            <button onclick="filtrarPorRegiao('Todos', this)" class="btn-filtro active px-5 py-3.5 rounded-xl text-sm font-bold border border-estacio-lightBlue bg-estacio-lightBlue/20 text-white whitespace-nowrap shadow-[0_0_15px_rgba(0,114,206,0.3)] transition-all">Todos</button>
+                            <button onclick="filtrarPorRegiao('Belo Horizonte', this)" class="btn-filtro px-5 py-3.5 rounded-xl text-sm font-bold border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 whitespace-nowrap transition-all">Belo Horizonte</button>
+                            <button onclick="filtrarPorRegiao('Nova Lima', this)" class="btn-filtro px-5 py-3.5 rounded-xl text-sm font-bold border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 whitespace-nowrap transition-all">Nova Lima</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid de Polos -->
+                <div id="grid-polos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 scroll-reveal opacity-0 translate-y-8 transition-all duration-700 delay-200">
+                    <!-- Gerado via JS -->
+                </div>
+                
+                <!-- Feedback Vazio -->
+                <div id="mensagem-vazia" class="hidden text-center py-16 text-slate-400 bg-white/5 rounded-3xl border border-white/5 mt-8 backdrop-blur-sm">
+                    <i class="ph-fill ph-map-pin-slash text-5xl mb-4 text-slate-500"></i>
+                    <h4 class="text-lg font-bold text-white mb-2 font-display">Nenhum polo encontrado</h4>
+                    <p class="text-sm">Tente buscar pelo nome da cidade principal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: 5 TENSÕES (Soluções) -->
+        <section id="solucoes" class="py-20 bg-slate-50 border-t border-slate-200 text-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal opacity-0 translate-y-8 transition-all duration-700">
+                    <h2 class="text-sm font-bold text-estacio-lightBlue uppercase tracking-[0.2em] mb-2">Entendemos Você</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold text-estacio-blue mb-4">Quebramos as barreiras entre você e seu diploma</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 scroll-reveal opacity-0 translate-y-8 delay-100 group">
+                        <div class="w-14 h-14 bg-blue-100 text-estacio-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-clock text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-3">"Não tenho tempo"</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Modelos <strong>EAD e Flex</strong>: assista às aulas teóricas de onde quiser e vá ao polo apenas para as atividades práticas.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 scroll-reveal opacity-0 translate-y-8 delay-200 group">
+                        <div class="w-14 h-14 bg-green-100 text-estacio-green rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-wallet text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-3">"A grana tá curta"</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Com o <strong>Parcelamento PAR</strong>, você paga apenas 30% da mensalidade estudando e 70% só depois de formado.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 scroll-reveal opacity-0 translate-y-8 delay-300 group">
+                        <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-users-three text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-3">"Medo de ficar sozinho"</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Nossa rede de polos possui equipes prontas para te ajudar presencialmente ou no WhatsApp sempre que precisar.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 scroll-reveal opacity-0 translate-y-8 delay-400 group">
+                        <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-compass text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-3">"Não sei o que cursar"</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">A Bcc Consultoria atua como orientadora. Te ajudamos a escolher o curso que mais combina com o mercado regional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER LEGAL (META ADS APPROVED) -->
+    <footer class="bg-estacio-dark pt-16 pb-8 border-t-4 border-estacio-green relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div class="col-span-1">
+                    <div class="mb-6 bg-white inline-flex px-6 py-4 rounded-2xl shadow-lg items-center gap-4">
+                        <img class="h-16 md:h-24 w-auto scale-[2] md:scale-[2]" style="transform-origin: left center;" src="img/logo.png.svg" alt="Logo Estácio Polo Nova Lima">
+                        <div class="flex flex-col border-l-2 border-slate-200 pl-4 py-0.5 ml-8">
+                            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-widest leading-tight">Polo Nova Lima</span>
+                            <span class="text-[11px] font-black text-estacio-blue uppercase tracking-widest leading-tight">Rede Bcc</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                        Somos a <strong>Bcc Consultoria em Educação</strong>, uma rede parceira dedicada à sua formação com polos em Nova Lima, BH e em todo o estado de Minas Gerais.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <a href="https://www.instagram.com/eadestaciobh" target="_blank" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all duration-300">
+                            <i class="ph-fill ph-instagram-logo text-xl"></i>
+                        </a>
+                        <a href="https://wa.me/5531971772093" target="_blank" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#25D366] hover:scale-110 transition-all duration-300">
+                            <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-display uppercase tracking-wider text-sm border-b border-white/10 pb-3 inline-block">Central Bcc Consultoria</h4>
+                    <ul class="space-y-4 text-slate-300 text-sm font-light">
+                        <li class="flex items-start gap-3">
+                            <i class="ph-fill ph-map-pin text-estacio-lightBlue text-xl mt-0.5"></i>
+                            <span class="leading-relaxed">Rua Domingos Rodrigues, 290 - Comp. C<br>Centro - Nova Lima/MG<br>CEP: 34000-075</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph-fill ph-envelope-simple text-estacio-lightBlue text-xl"></i>
+                            <a href="mailto:contato@polosestacio.com.br" class="hover:text-white transition-colors">contato@polosestacio.com.br</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph-fill ph-whatsapp-logo text-estacio-green text-xl"></i>
+                            <a href="https://wa.me/5531971772093" class="hover:text-white transition-colors font-medium">(31) 97177-2093</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-display uppercase tracking-wider text-sm border-b border-white/10 pb-3 inline-block">Transparência Legal</h4>
+                    <ul class="space-y-4 text-slate-300 text-sm font-light">
+                        <li><button type="button" onclick="abrirModalPrivacidade(event)" class="hover:text-white transition-colors flex items-center gap-3"><i class="ph ph-shield-check text-xl text-slate-400"></i> Política de Privacidade (LGPD)</button></li>
+                        <li><a href="#solucoes" class="hover:text-white transition-colors flex items-center gap-3"><i class="ph ph-file-text text-xl text-slate-400"></i> Termos do Parcelamento PAR</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col items-center gap-4 text-center">
+                <p class="max-w-5xl text-xs text-slate-500/80 leading-relaxed text-justify font-light">
+                    <strong class="text-slate-400">AVISO LEGAL - META PLATFORMS:</strong> Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site não é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial independente da META PLATFORMS, INC. A Bcc Consultoria em Educação atua como operadora de polos parceiros independentes da Universidade Estácio de Sá. Todas as ofertas de bolsas estão sujeitas à análise de crédito e regulamento vigente. Utilizamos cookies e pixels de rastreamento para personalizar anúncios.
+                </p>
+                <p class="text-slate-400 text-xs font-medium">&copy; 2026 Bcc Consultoria em Educação (CNPJ: 09.206.895/0001-90). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL POLÍTICA DE PRIVACIDADE -->
+    <div id="modalPrivacidade" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="fecharModalPrivacidade()"></div>
+        <div class="relative w-full max-w-2xl bg-white border border-slate-200 rounded-3xl shadow-2xl p-8 max-h-[85vh] overflow-y-auto transform transition-all scale-95 opacity-0 duration-300">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
+                <h2 class="text-2xl font-display font-bold text-estacio-blue">Política de Privacidade</h2>
+                <button type="button" onclick="fecharModalPrivacidade()" class="text-slate-400 hover:text-slate-800 transition-colors p-2 bg-slate-100 rounded-lg">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-6 text-slate-600 text-sm leading-relaxed">
+                <p>A <strong>Bcc Consultoria em Educação</strong> (CNPJ: 09.206.895/0001-90) respeita a sua privacidade (LGPD - Lei nº 13.709/2018).</p>
+                <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1">1. Coleta de Dados</h3>
+                    <p>Coletamos seu Nome, WhatsApp e Unidade de Interesse exclusivamente para atendimento comercial.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1">2. Não Compartilhamento</h3>
+                    <p>Seus dados não são vendidos para terceiros. Eles são inseridos no sistema oficial da Estácio em caso de matrícula.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-1">3. Pixel de Rastreamento</h3>
+                    <p>Utilizamos o Pixel do Facebook/Meta nesta página para otimização de campanhas de marketing locais.</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-slate-100 text-right">
+                <button type="button" onclick="fecharModalPrivacidade()" class="bg-estacio-blue hover:bg-estacio-lightBlue text-white px-6 py-2.5 rounded-xl font-bold transition-colors shadow-md">Concordo e Fechar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- BLOCO 2: JAVASCRIPT (VANILLA & CANVAS)     -->
+    <!-- ========================================== -->
+    <script>
+        // ----------------------------------------------------
+        // MOTOR DO CANVAS (Performance & Responsividade)
+        // ----------------------------------------------------
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrameId;
+
+        // Configuração de responsividade anti-blur
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+            initParticles();
+        }
+
+        // Sistema de Partículas (Conexões Bcc)
+        class Particle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                // Cores da marca: Azul claro ou Verde
+                this.color = Math.random() > 0.5 ? 'rgba(0, 114, 206, 0.4)' : 'rgba(0, 200, 83, 0.4)';
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Reciclagem de memória (Wrap around em vez de instanciar novos objetos)
+                if (this.x < 0) this.x = window.innerWidth;
+                if (this.x > window.innerWidth) this.x = 0;
+                if (this.y < 0) this.y = window.innerHeight;
+                if (this.y > window.innerHeight) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            // Quantidade calculada responsivamente com base na área da tela
+            const numParticles = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Conectar partículas próximas (Teia)
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 114, 206, ${0.15 - dist/800})`; // Fade pela distância
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            animationFrameId = requestAnimationFrame(animateCanvas);
+        }
+
+        // Inicializa o Canvas
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animateCanvas();
+
+
+        // ----------------------------------------------------
+        // DADOS DOS POLOS (STATE MANAGEMENT VANILLA)
+        // ----------------------------------------------------
+        const redePolos = [
+            { id: 1,  nome: "Nova Lima (Centro)", cidade: "Nova Lima", endereco: "Rua Domingos Rodrigues, 290 - Comp. C - Centro", zap: "5531983693425", zapDisplay: "(31) 98369-3425", isSede: true },
+            { id: 2,  nome: "Abílio Machado", cidade: "Belo Horizonte", endereco: "Av. Abílio Machado, 1150 - Lj 108", zap: "5531987570556", zapDisplay: "(31) 98757-0556", isSede: false },
+            { id: 3,  nome: "Barro Preto", cidade: "Belo Horizonte", endereco: "R. Mato Grosso, 539 - LJ. 111", zap: "5531998520593", zapDisplay: "(31) 99852-0593", isSede: false },
+            { id: 4,  nome: "Silva Lobo", cidade: "Belo Horizonte", endereco: "Av Silva Lobo, 1.306 - N. Granada", zap: "5531993121306", zapDisplay: "(31) 99312-1306", isSede: false },
+            { id: 5,  nome: "Santa Efigênia", cidade: "Belo Horizonte", endereco: "Rua Domingos Vieira, 319 - Lj 07", zap: "5531990652731", zapDisplay: "(31) 99065-2731", isSede: false },
+            { id: 6,  nome: "Savassi", cidade: "Belo Horizonte", endereco: "Av do Contorno, 6777 Lj 5", zap: "5531999151050", zapDisplay: "(31) 99915-1050", isSede: false },
+            { id: 7,  nome: "Buritis", cidade: "Belo Horizonte", endereco: "Av Mário Werneck 1712", zap: "5531998993500", zapDisplay: "(31) 99899-3500", isSede: false },
+            { id: 8,  nome: "Ipatinga Iguaçu", cidade: "Ipatinga", endereco: "Rua Minerais Nº410 Lj 03", zap: "5531998925424", zapDisplay: "(31) 99892-5424", isSede: false },
+            { id: 9,  nome: "Cidade Nobre", cidade: "Ipatinga", endereco: "Rua Alexander Fleming n°99", zap: "5531999500053", zapDisplay: "(31) 99950-0053", isSede: false },
+            { id: 10, nome: "Viçosa Centro", cidade: "Viçosa", endereco: "Av PH Rolfs, 375 - SL203", zap: "553195206947", zapDisplay: "(31) 9520-6947", isSede: false },
+            { id: 11, nome: "Cons. Lafaiete", cidade: "Cons. Lafaiete", endereco: "Prof. Manoel Martins 250", zap: "5531971874828", zapDisplay: "(31) 97187-4828", isSede: false },
+            { id: 12, nome: "Itabirito", cidade: "Itabirito", endereco: "Av Queiroz Junior 937 - Praia", zap: "5531971585472", zapDisplay: "(31) 97158-5472", isSede: false },
+            { id: 13, nome: "Centro Sta Bárbara", cidade: "Santa Bárbara", endereco: "Rua João Mota, 372, Sala 204", zap: "5531989110188", zapDisplay: "(31) 98911-0188", isSede: false },
+            { id: 14, nome: "Santa Luzia", cidade: "Santa Luzia", endereco: "Av Brasilia 1825 loja 20", zap: "5531991966307", zapDisplay: "(31) 99196-6307", isSede: false },
+            { id: 15, nome: "Centro Lavras", cidade: "Lavras", endereco: "Rua Joao Modesto, 213", zap: "5535999464524", zapDisplay: "(35) 99946-4524", isSede: false },
+            { id: 16, nome: "Sete Lagoas", cidade: "Sete Lagoas", endereco: "Cel. Américo Teixeira G. 37", zap: "5531999556395", zapDisplay: "(31) 99955-6395", isSede: false },
+            { id: 17, nome: "Ribeirão das Neves", cidade: "Rib. das Neves", endereco: "Rua Pedro da costa Correa 39", zap: "553136270785", zapDisplay: "(31) 3627-0785", isSede: false },
+            { id: 18, nome: "Getúlio Vargas", cidade: "Timóteo", endereco: "R. Miguel Maura, 212 - Sl 07", zap: "5531996681450", zapDisplay: "(31) 99668-1450", isSede: false },
+            { id: 19, nome: "Pilar", cidade: "Ouro Preto", endereco: "Rua Augusta B. de Oliveira, 37", zap: "5531997628474", zapDisplay: "(31) 99762-8474", isSede: false },
+            { id: 20, nome: "São João Del Rei", cidade: "S. João Del Rei", endereco: "Av Josué de Queiroz n 611", zap: "5532988107652", zapDisplay: "(32) 98810-7652", isSede: false },
+            { id: 21, nome: "Itabira", cidade: "Itabira", endereco: "Travessa da Saude / Loja 05", zap: "5531997924781", zapDisplay: "(31) 99792-4781", isSede: false },
+            { id: 22, nome: "Mariana", cidade: "Mariana", endereco: "Rua Seminario, 116", zap: "5531971215465", zapDisplay: "(31) 97121-5465", isSede: false }
+        ];
+
+        // ----------------------------------------------------
+        // LÓGICA DO BUSCADOR DE POLOS
+        // ----------------------------------------------------
+        const gridPolos = document.getElementById('grid-polos');
+        const msgVazia = document.getElementById('mensagem-vazia');
+
+        function renderizarPolos(lista) {
+            gridPolos.innerHTML = '';
+            
+            if(lista.length === 0) {
+                gridPolos.classList.add('hidden');
+                msgVazia.classList.remove('hidden');
+                return;
+            }
+
+            gridPolos.classList.remove('hidden');
+            msgVazia.classList.add('hidden');
+
+            lista.forEach((polo) => {
+                const card = document.createElement('div');
+                const badge = polo.isSede ? `<span class="bg-estacio-blue text-white text-[10px] font-bold uppercase px-3 py-1 rounded-full border border-estacio-lightBlue/30 shadow-lg">Sede Bcc</span>` : '';
+                
+                card.className = `relative group bg-white/5 border border-white/10 rounded-3xl p-1.5 transition-all duration-300 hover:bg-white/10 hover:border-estacio-lightBlue/50 hover:shadow-[0_10px_30px_rgba(0,114,206,0.15)]`;
+                
+                card.innerHTML = `
+                    <div class="bg-[#0A1325] rounded-[20px] p-6 h-full flex flex-col relative z-10 overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-estacio-blue/10 rounded-full blur-2xl pointer-events-none group-hover:bg-estacio-lightBlue/20 transition-colors"></div>
+                        <div class="flex justify-between items-start mb-5 relative z-10">
+                            <div class="w-12 h-12 rounded-2xl bg-estacio-blue/20 flex items-center justify-center border border-estacio-blue/30 text-estacio-lightBlue group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                <i class="ph-fill ph-map-pin text-2xl"></i>
+                            </div>
+                            ${badge}
+                        </div>
+                        <div class="relative z-10 flex-grow">
+                            <p class="text-estacio-lightBlue text-[10px] font-bold uppercase tracking-widest mb-1.5">${polo.cidade}</p>
+                            <h4 class="text-xl font-display font-bold text-white mb-3">Polo ${polo.nome}</h4>
+                            <p class="text-slate-400 text-sm mb-6 flex items-start gap-2 leading-relaxed">
+                                ${polo.endereco}
+                            </p>
+                        </div>
+                        <a href="https://wa.me/${polo.zap}?text=Ol%C3%A1!%20Encontrei%20o%20Polo%20${encodeURIComponent(polo.nome)}%20pelo%20site.%20Gostaria%20de%20saber%20sobre%20as%20bolsas!" target="_blank" class="relative z-10 w-full bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 hover:border-[#25D366] py-3.5 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                            <i class="ph-fill ph-whatsapp-logo text-xl group-hover/btn:scale-110 transition-transform"></i> ${polo.zapDisplay}
+                        </a>
+                    </div>
+                `;
+                gridPolos.appendChild(card);
+            });
+        }
+
+        // Ordena por cidade e renderiza inicial
+        redePolos.sort((a, b) => a.cidade.localeCompare(b.cidade));
+        renderizarPolos(redePolos);
+
+        function buscarPorTexto() {
+            const termo = document.getElementById('buscaPolo').value.toLowerCase();
+            
+            atualizarBotoesFiltro(termo.length > 0 ? null : 'Todos');
+
+            const filtrados = redePolos.filter(p => 
+                p.cidade.toLowerCase().includes(termo) || 
+                p.nome.toLowerCase().includes(termo) ||
+                p.endereco.toLowerCase().includes(termo)
+            );
+            renderizarPolos(filtrados);
+        }
+
+        function filtrarPorRegiao(regiao, elementoBotao) {
+            document.getElementById('buscaPolo').value = '';
+            atualizarBotoesFiltro(regiao, elementoBotao);
+
+            if (regiao === 'Todos') {
+                renderizarPolos(redePolos);
+            } else {
+                const filtrados = redePolos.filter(p => p.cidade.includes(regiao));
+                renderizarPolos(filtrados);
+            }
+        }
+
+        function atualizarBotoesFiltro(regiaoAtiva) {
+            const botoes = document.querySelectorAll('.btn-filtro');
+            const classActive = "btn-filtro active px-5 py-3.5 rounded-xl text-sm font-bold border border-estacio-lightBlue bg-estacio-lightBlue/20 text-white whitespace-nowrap transition-all shadow-[0_0_15px_rgba(0,114,206,0.3)]";
+            const classInactive = "btn-filtro px-5 py-3.5 rounded-xl text-sm font-bold border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 whitespace-nowrap transition-all";
+            
+            botoes.forEach(btn => {
+                btn.className = (regiaoAtiva && btn.innerText.includes(regiaoAtiva)) ? classActive : classInactive;
+            });
+        }
+
+        // ----------------------------------------------------
+        // LÓGICA DO FORMULÁRIO (Conversão Pura via JS)
+        // ----------------------------------------------------
+        function enviarParaCentral(event) {
+            event.preventDefault();
+            
+            const nome = document.getElementById('nomeInput').value.trim();
+            const zap = document.getElementById('whatsappInput').value.trim();
+            const unidadeSelect = document.getElementById('unidadeInput');
+            const termos = document.getElementById('aceite_termos').checked;
+            
+            // Validação explícita em JS (Substitui o required do HTML que pode falhar silenciosamente)
+            if (!nome || !zap || !unidadeSelect.value || !termos) {
+                alert('Por favor, preencha todos os campos e aceite a Política de Privacidade para continuar.');
+                return;
+            }
+
+            const unidade = unidadeSelect.options[unidadeSelect.selectedIndex].text;
+            const numeroCentral = "5531971772093"; 
+            
+            const mensagem = `Olá, Central Bcc!\n\nO meu nome é *${nome}* e preenchi o site agora.\n\nTenho interesse em estudar na unidade: *${unidade}*.\n\nGostaria de simular a minha bolsa e entender como funciona o financiamento PAR!`;
+            const urlWhatsApp = `https://wa.me/${numeroCentral}?text=${encodeURIComponent(mensagem)}`;
+            
+            // Redirecionamento blindado contra bloqueadores de pop-up
+            window.location.href = urlWhatsApp;
+        }
+
+        // ----------------------------------------------------
+        // UX & ACESSIBILIDADE (Modais e Scroll)
+        // ----------------------------------------------------
+        function focarFormulario(event) {
+            if (event) event.preventDefault();
+            const inputNome = document.getElementById('nomeInput');
+            if (inputNome) {
+                inputNome.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => { inputNome.focus(); }, 500);
+            }
+        }
+
+        // Intersection Observer otimizado (substitui o onScroll antigo e pesado)
+        const observerOptions = { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        function abrirModalPrivacidade(event) {
+            if(event) event.preventDefault();
+            const modal = document.getElementById('modalPrivacidade');
+            const modalContent = modal.querySelector('div.relative');
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function fecharModalPrivacidade() {
+            const modal = document.getElementById('modalPrivacidade');
+            const modalContent = modal.querySelector('div.relative');
+            
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
