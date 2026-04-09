@@ -52,3 +52,7 @@ A **Bcc Consultoria em Educação** é um polo dedicado à excelência no ensino
     - [Aviso de Cookies](#)
 - **Redes Sociais:**
     - Instagram: [@eadestaciobh](https://www.instagram.com/eadestaciobh)
+
+
+---
+[[00_CENTRAL_DE_COMANDO|🏠 Home]]
